@@ -1,0 +1,95 @@
+# @apiUrl=https://portal-api.loca.lt
+@apiUrl = http://localhost:3000
+# @apiUrl = http://localhost:5001
+
+# @sessionToken={{$guid}}
+@sessionToken=046a3143-2dfa-4b51-8dd5-5a88da97955d
+
+### get session 
+GET  {{apiUrl}}/api/v1/session
+
+### get services 
+GET  {{apiUrl}}/api/v1/services
+
+### onboard online user : Step 1 - send verification code
+POST {{apiUrl}}/api/v1/onboard/{{sessionToken}}
+Content-Type: application/json
+
+{
+  "email": "tymir.lamin@mybankloans.org",
+  "firstName": "Ajay",
+  "lastName": "Kumar",
+  "mobile": "9090129092"
+}
+
+### onboard online user : Step 2 - verify code
+@validationCode="RFN-409"
+POST {{apiUrl}}/api/v1/onboard/{{sessionToken}}
+Content-Type: application/json
+
+{
+  "email": "tymir.lamin@mybankloans.org",
+  "firstName": "Ajay",
+  "lastName": "Kumar",
+  "mobile": "9090129092",
+  "validationCode": {{validationCode}}
+}
+
+
+### get appintment list 
+GET  {{apiUrl}}/api/v1/appointment/{{sessionToken}}
+
+### Create appintment 
+POST {{apiUrl}}/api/v1/appointment/{{sessionToken}}
+Content-Type: application/json
+
+{
+
+  "appointment": {
+    "company": "Sapient",
+    "socialMediaLink": "https://www.youtube.com/",
+    "privacyAccepted": true,
+    "title": "youTube",
+    "description": "sdsd",
+   
+    "serviceItems": [
+      {
+        "sku": "1",
+        "occurrences": "recurring"
+      },
+      {
+        "sku": "2",
+        "occurrences": "oneTime"
+      },
+      {
+        "sku": "3",
+        "occurrences": "recurring"
+      },
+      {
+        "sku": "4",
+        "occurrences": "oneTime"
+      },
+      {
+        "sku": "5",
+        "occurrences": "recurring"
+      },
+      {
+        "sku": "6",
+        "occurrences": "recurring"
+      },
+      {
+        "sku": "7",
+        "occurrences": "recurring"
+      },
+      {
+        "sku": "8",
+        "occurrences": "recurring"
+      }
+    ],
+    "startDateTime": "09/26/2024 09:30",
+    "endDateTime": "09/26/2024 09:45",
+    "actualDate": "2024-09-26T07:02:50.322Z",
+    "startTime": "3:00 PM",
+    "endTime": "3:15 PM"
+  }
+}
